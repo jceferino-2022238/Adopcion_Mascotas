@@ -2,7 +2,7 @@ const Role = require('../models/role');
 const Usuario = require('../models/usuario');
 const Mascota = require('../models/mascotas');
 
-const existenteNombreMascota = async (role = '') =>{
+const existenteNombreMascota = async (nombreMascota = '') =>{
     const existeNM = await Mascota.findOne({nombreMascota});
     if(existeNM){
         throw new Error(`El nombre ${nombreMascota} ya se ha usado en una mascota`);

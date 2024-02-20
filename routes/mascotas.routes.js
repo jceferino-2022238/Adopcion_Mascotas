@@ -6,7 +6,7 @@ const { mascotasGet,
         putMascotas, 
         mascotasPost, 
         mascotasDelete } = require('../controller/mascotas.controller');
-const { existeMascotaById } = require('../helpers/db-validators');
+const { existeMascotaById, existenteNombreMascota } = require('../helpers/db-validators');
 
 const router = Router();
 
@@ -32,7 +32,11 @@ router.post(
     '/',
     [
         check('nombreMascota', 'El nombre de la mascota no puede estar vacío').not().isEmpty(),
+        check('nombreMascota').custom(existenteNombreMascota),
         check('especie', 'La especie de la mascota no puede estar vacía').not().isEmpty(),
+        check('edad', 'La edad de la mascota no puede estar vacía').not().isEmpty(),
+        check('tamaño', 'El tamaño de la mascota no puede estar vacío').not().isEmpty(),
+        check('peso', 'El peso de la mascota no puede estar vacío').not().isEmpty(),
         check('estadoAdopcion', 'El estado de adopcion no puede estar vacío').not().isEmpty(),
         check('lugarCrianza', 'El lugar donde se crio el animal no puede estar vacío').not().isEmpty(),
         validarCampos
